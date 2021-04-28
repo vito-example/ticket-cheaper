@@ -19,3 +19,21 @@ const GridMap: FC<gridMapProps> = ({locations,isSearchedResults,inputValueX,inpu
 }
 
 export default GridMap;
+
+
+/**
+ *
+ * @param locations
+ * @param id
+ */
+const getLocationById = (locations: Array<Location>, id: number) => {
+    for(let location of locations){
+        if(location.id == id){
+            return location;
+        }else{
+            // do nothing
+        }
+    }
+
+    return null;
+}
