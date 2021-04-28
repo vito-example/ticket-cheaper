@@ -1,3 +1,5 @@
+import {Event} from "./Event";
+
 export class Location {
     public id: number;
     public coordinateX: number;
