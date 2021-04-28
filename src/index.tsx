@@ -8,7 +8,8 @@ import {
     MIN_NUMBER_OF_TICKETS,
     MIN_TICKET_PRICE
 } from "./constants";
-import {Ticket} from "./components/Ticket";
+import {Ticket} from "./models/Ticket";
+import {Event} from "./models/Event";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -17,6 +18,14 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+/**
+ * @desc Generates a event with random number of tickets
+ * @param id
+ */
+const generateRandomEvent = (id: number) => {
+    let tickets = generateRandomTickets();
+    return  new Event(id, tickets);
+}
 
 /**
  * @desc Generates random number of tickets with random prices.
