@@ -36,6 +36,7 @@ class App extends Component<AppProps, AppState> {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClearInput = this.handleClearInput.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     /**

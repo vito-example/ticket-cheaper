@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {Location} from "../../../models/Location";
 
 
@@ -8,3 +8,14 @@ export interface gridMapProps {
     inputValueX: number,
     inputValueY: number
 }
+
+const GridMap: FC<gridMapProps> = ({locations,isSearchedResults,inputValueX,inputValueY}) => {
+
+    return (
+        <div className='grid-map'>
+            grid map
+        </div>
+    )
+}
+
+export default GridMap;
