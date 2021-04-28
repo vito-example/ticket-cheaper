@@ -18,6 +18,10 @@ ReactDOM.render(
 );
 
 
+/**
+ * @desc Generates random number of tickets with random prices.
+ * @return {Array<Ticket>} - An array of Tickets.
+ */
 const generateRandomTickets = () => {
     // Generate a random number for the number of tickets
     let numberOfTicket: number = generateRandomInteger(MIN_NUMBER_OF_TICKETS,MAX_NUMBER_OF_TICKETS);
