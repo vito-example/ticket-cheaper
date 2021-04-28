@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {MAX_NUMBER_OF_LOCATIONS} from "./constants";
+import {
+    MAX_NUMBER_OF_LOCATIONS,
+    MAX_NUMBER_OF_TICKETS,
+    MAX_TICKET_PRICE,
+    MIN_NUMBER_OF_TICKETS,
+    MIN_TICKET_PRICE
+} from "./constants";
+import {Ticket} from "./components/Ticket";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -10,6 +17,19 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+
+const generateRandomTickets = () => {
+    // Generate a random number for the number of tickets
+    let numberOfTicket: number = generateRandomInteger(MIN_NUMBER_OF_TICKETS,MAX_NUMBER_OF_TICKETS);
+    let tickets: any[] = [];
+    for (let i=0; i < numberOfTicket; i++) {
+        // Define the price of the ticket
+        let ticket = new Ticket(generateRandomDouble(MIN_TICKET_PRICE,MAX_TICKET_PRICE));
+        tickets.push(ticket);
+    }
+
+    return tickets;
+}
 
 /**
  * @desc Generates random integer
@@ -25,7 +45,7 @@ const generateRandomInteger = (min: number, max: number): number => {
  * @param min
  * @param max
  */
-const generateRandomDouble = (min: number, max: number) => {
+const generateRandomDouble = (min: number, max: number): number => {
     return Math.floor((Math.random() * (max - min + 1) + min) * 100) / 100;
 }
 
