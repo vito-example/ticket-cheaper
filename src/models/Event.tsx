@@ -2,7 +2,7 @@ import {Ticket} from "./Ticket";
 
 
 export class Event {
-    protected id: number;
+    id: number;
     protected tickets: Array<Ticket>;
 
     constructor(id: number, tickets: Array<Ticket>) {
