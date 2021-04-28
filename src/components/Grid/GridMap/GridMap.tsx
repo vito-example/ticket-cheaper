@@ -40,6 +40,7 @@ const GridMap: FC<gridMapProps> = ({locations, isSearchedResults, inputValueX, i
                             {isSearchedResults ? (<p style={{visibility: !{isSearchedResults} ? 'visible' : 'hidden'}}>Distance from
                                 ({inputValueX},{inputValueY}): {location.getDistance(inputValueX, inputValueY)}</p>) : ''}
                         </div>
+
                     </div>
                 );
             } else {
