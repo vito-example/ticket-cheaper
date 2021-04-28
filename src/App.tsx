@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Location} from "./models/Location";
 import {NUMBER_OF_CLOSEST_LOCATIONS} from "./constants";
+import {isInteger} from "./utils/is-integer";
 
 
 interface AppProps {
@@ -47,7 +48,67 @@ class App extends Component<AppProps, AppState> {
         });
     }
 
+    handleSearch(event: any) {
+        console.log(`Input coordinate: ${this.state.inputValue}`);
 
+        let inputValue = this.state.inputValue;
+        let inputValues = inputValue.split(',');
+
+        this.setState({
+            inputHasError: false,
+            inputErrorMessage: ''
+        });
+
+        let hasError = false;
+
+        if (inputValues) {
+            if (inputValues.length === 2) {
+                let inputValueX = inputValue[0];
+                let inputValueY = inputValue[1];
+
+                if (isInteger(inputValueX) && isInteger(inputValueY)) {
+                    let inputX = parseInt(inputValueX, 10);
+                    let inputY = parseInt(inputValueY, 10);
+
+                    // Validate input value
+                    if ((inputX >= -10 && inputX <= 10) && (inputY >= -10 && inputY <= 10)) {
+                        this.setState({
+                            inputValueX: inputX,
+                            inputValueY: inputY,
+                            locationsToShow: getClosestLocations(inputX,inputY,this.props.locationArray),
+                            isSearchedResults: true,
+                            resultsMessage: `Here are the closest event from (${inputX},${inputY}.`
+                        })
+                    } else {
+                        // coordinate outside the scope
+                        hasError = true;
+                    }
+                } else {
+                    // Input values contain non-interger(s)
+                    hasError = true;
+                }
+            } else {
+                // More than one comma in the input
+                hasError = true;
+            }
+        } else {
+            // Input value is not valid
+            hasError = true;
+        }
+
+        // Update the error message if there is error
+        if(hasError) {
+            this.setState({
+                inputHasError: true,
+                inputErrorMessage: "(Error: Please input the right format of coordinate: x,y , where x and y are integer and both within [-10,10].)",
+                locationsToShow: [],
+                resultsMessage: "Sorry, there is no event to display."
+            })
+        } else {
+            //
+        }
+        event.preventDefault();
+    }
 
     /**
      * @desc Update the inputValue from the input form
@@ -94,7 +155,7 @@ class App extends Component<AppProps, AppState> {
  * @param inputY
  * @param locations
  */
-const getClosestLocations = (inputX: number, inputY: number,locations: Array<Location>) => {
+const getClosestLocations = (inputX: number, inputY: number, locations: Array<Location>) => {
     let closestLocations = [];
 
     // Sort the locations in ascending order of the distances away the input coordinates
@@ -103,7 +164,7 @@ const getClosestLocations = (inputX: number, inputY: number,locations: Array<Loc
     });
 
     // Get at most five of the closest locations
-    for (let i =0; i<NUMBER_OF_CLOSEST_LOCATIONS && i<locations.length; i++) {
+    for (let i = 0; i < NUMBER_OF_CLOSEST_LOCATIONS && i < locations.length; i++) {
         closestLocations.push(locations[i]);
     }
 
