@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Location} from "./models/Location";
+import {NUMBER_OF_CLOSEST_LOCATIONS} from "./constants";
 
 
 interface AppProps {
@@ -73,6 +74,38 @@ class App extends Component<AppProps, AppState> {
 
 
     render() {
+        const {
+            inputValue,
+            inputValueX,
+            inputValueY,
+            locationsToShow,
+            isSearchedResults,
+            inputHasError,
+            inputErrorMessage,
+            resultsMessage
+        } = this.state;
 
     }
+}
+
+/**
+ * @desc Get the closest locations which have events to the input coordinates
+ * @param inputX
+ * @param inputY
+ * @param locations
+ */
+const getClosestLocations = (inputX: number, inputY: number,locations: Array<Location>) => {
+    let closestLocations = [];
+
+    // Sort the locations in ascending order of the distances away the input coordinates
+    locations.sort(function (locationA: Location, locationB: Location) {
+        return locationA.getDistance(inputX, inputY) - locationB.getDistance(inputX, inputY);
+    });
+
+    // Get at most five of the closest locations
+    for (let i =0; i<NUMBER_OF_CLOSEST_LOCATIONS && i<locations.length; i++) {
+        closestLocations.push(locations[i]);
+    }
+
+    return closestLocations;
 }
