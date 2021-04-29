@@ -1,3 +1,5 @@
+@import "../../../assets/Variables";
+
 .grid-map {
   padding: 20px 20%;
 }
@@ -10,15 +12,15 @@
 }
 
 .grid-item-active {
-  background: yellowgreen;
+  background: $main-color;
   cursor: pointer;
 }
 
 .grid-item-hover-over {
   visibility: hidden;
   width: 180px;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  background-color: $bg-second-color;
+  color: $main-color;
   padding: 0 10px;
   border-radius: 4px;
   position: absolute;

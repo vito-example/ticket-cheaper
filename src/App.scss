@@ -1,4 +1,4 @@
-
+@import "./assets/Variables";
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +8,7 @@ body {
     text-align: center;
     padding-top: 80px;
     padding-bottom: 80px;
-    background-color: lightslategray;
+    background-color: $bg-color;
 
     h2 {
       color: white;
@@ -41,11 +41,11 @@ body {
   }
 
   input[type=submit] {
-    background-color: yellowgreen;
+    background-color: $main-color;
     color: white;
     margin: 5px;
     padding: 10px 40px;
-    border: 1px solid yellowgreen;
+    border: 1px solid $main-color;
     border-radius: 2px;
     cursor: pointer;
     font-size: 18px;
