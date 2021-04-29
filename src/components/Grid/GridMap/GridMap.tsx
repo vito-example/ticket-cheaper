@@ -31,7 +31,7 @@ const GridMap: FC<gridMapProps> = ({locations, isSearchedResults, inputValueX, i
                 // If the location is in the array of locations to show
                 // Color this grid with green and show relevant information of the event on this location
                 gridMapHTML.push(
-                    <div className={"grid-item grid-item-active " + searchedLocationStyle}
+                    <div key={location.id} className={"grid-item grid-item-active " + searchedLocationStyle}
                          style={{display: "inline-block"}}>
                         <div className={"grid-item-hover-over"}>
                             <h4>Event {location.event.id}</h4>
@@ -46,7 +46,7 @@ const GridMap: FC<gridMapProps> = ({locations, isSearchedResults, inputValueX, i
             } else {
                 // If the location is not in the array of locations to show
                 // Color this grid with gray and show only show the coordinate of this location
-                gridMapHTML.push(<div className={"grid-item grid-item-inactive " + searchedLocationStyle}
+                gridMapHTML.push(<div key={`${i}-${j}`} className={"grid-item grid-item-inactive " + searchedLocationStyle}
                                       style={{display: "inline-block"}}>
                     <div className={"grid-item-hover-over"}>
                         <p>Location:({j - 10},{10 - i})</p>
@@ -55,7 +55,7 @@ const GridMap: FC<gridMapProps> = ({locations, isSearchedResults, inputValueX, i
             }
         }
         // Break the row and start a new row
-        gridMapHTML.push(<br/>)
+        gridMapHTML.push(<br key={`br-${i}`}/>)
     }
 
     return (

@@ -66,8 +66,8 @@ class App extends Component<AppProps, AppState> {
 
         if (inputValues) {
             if (inputValues.length === 2) {
-                let inputValueX = inputValue[0];
-                let inputValueY = inputValue[1];
+                let inputValueX = inputValues[0];
+                let inputValueY = inputValues[1];
 
                 if (isInteger(inputValueX) && isInteger(inputValueY)) {
                     let inputX = parseInt(inputValueX, 10);

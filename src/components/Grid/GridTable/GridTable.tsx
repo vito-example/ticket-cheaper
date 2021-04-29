@@ -13,6 +13,7 @@ const GridTable: FC<gridTableProps> = ({locations, isSearchedResults, inputValue
     return (
         <div className='grid-table'>
             <table>
+                <tbody>
                 <tr>
                     <th>Event</th>
                     <th>Location</th>
@@ -21,36 +22,37 @@ const GridTable: FC<gridTableProps> = ({locations, isSearchedResults, inputValue
                     ) : null}
                     <th>Price from</th>
                 </tr>
-                {locations.map((location, i) => (
-                    <tr>
-                        <td>
-                            <h4>
-                                Event {location.event.id}
-                            </h4>
-                        </td>
-                        <td>
-                            ({location.coordinateX}, {location.coordinateY})
-                        </td>
-                        {isSearchedResults ? (
+                    {locations.map((location, i) => (
+                        <tr key={location.id}>
                             <td>
-                                {location.getDistance(inputValueX, inputValueY)}
+                                <h4>
+                                    Event {location.event.id}
+                                </h4>
                             </td>
-                        ) : null}
-                        <td>
-                            <div className='grid-table-price'>
-                                {location.event.hasTicket() ? (
-                                    <div className='grid-table-price-active'>
-                                        {location.event.getCheapestTicketPrice()}
-                                    </div>
-                                ) : (
-                                    <div className='grid-table-price-inactive'>
-                                        Sold out
-                                    </div>
-                                )}
-                            </div>
-                        </td>
-                    </tr>
-                ))}
+                            <td>
+                                ({location.coordinateX}, {location.coordinateY})
+                            </td>
+                            {isSearchedResults ? (
+                                <td>
+                                    {location.getDistance(inputValueX, inputValueY)}
+                                </td>
+                            ) : null}
+                            <td>
+                                <div className='grid-table-price'>
+                                    {location.event.hasTicket() ? (
+                                        <div className='grid-table-price-active'>
+                                            {location.event.getCheapestTicketPrice()}
+                                        </div>
+                                    ) : (
+                                        <div className='grid-table-price-inactive'>
+                                            Sold out
+                                        </div>
+                                    )}
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
         </div>
     )
