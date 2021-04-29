@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Location} from "../../../models/Location";
 import {RANGE_OF_X_AXIS, RANGE_OF_Y_AXIS} from "../../../constants";
-
+import './GridMap.scss';
 
 export interface gridMapProps {
     locations: Array<Location>;
@@ -37,8 +37,8 @@ const GridMap: FC<gridMapProps> = ({locations, isSearchedResults, inputValueX, i
                             <h4>Event {location.event.id}</h4>
                             <p>Location: ({j - 10},{10 - i})</p>
                             <p>Price from: {location.event.getCheapestTicketPrice()}</p>
-                            {isSearchedResults ? (<p style={{visibility: !{isSearchedResults} ? 'visible' : 'hidden'}}>Distance from
-                                ({inputValueX},{inputValueY}): {location.getDistance(inputValueX, inputValueY)}</p>) : ''}
+                            {isSearchedResults ? (<p style={{visibility: {isSearchedResults} ? 'hidden' : 'visible'}}>Distance from
+                                ({inputValueX},{inputValueY}): {location.getDistance(inputValueX, inputValueY)}</p>) : null}
                         </div>
 
                     </div>

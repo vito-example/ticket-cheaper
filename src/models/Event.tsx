@@ -23,7 +23,7 @@ export class Event {
             this.tickets.sort(function (ticketA: Ticket,ticketB: Ticket) {
                 return ticketA.price - ticketB.price;
             });
-            cheapestTicketPrice = `&${this.tickets[0].price}`
+            cheapestTicketPrice = `$${this.tickets[0].price}`
         } else {
             // There is no tickets in this event
         }

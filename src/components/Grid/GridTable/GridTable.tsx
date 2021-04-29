@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import {Location} from "../../../models/Location";
+import './GridTable.scss';
 
 export interface gridTableProps {
     locations: Array<Location>;
