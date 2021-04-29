@@ -75,7 +75,7 @@ export default GridMap;
  */
 const getLocationById = (locations: Array<Location>, id: number) => {
     for (let location of locations) {
-        if (location.id == id) {
+        if (location.id === id) {
             return location;
         } else {
             // do nothing

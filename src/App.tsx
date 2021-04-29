@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Location} from "./models/Location";
 import {NUMBER_OF_CLOSEST_LOCATIONS} from "./constants";
 import {isInteger} from "./utils/is-integer";
+import GridMap from "./components/Grid/GridMap/GridMap";
+import GridTable from "./components/Grid/GridTable/GridTable";
 
 
 interface AppProps {
@@ -45,7 +47,7 @@ class App extends Component<AppProps, AppState> {
     componentDidMount() {
         this.setState({
             locationsToShow: this.props.locationArray,
-            resultsMessage: `There are currently ${this.props.locationArray.length} events in the neighborhood`;
+            resultsMessage: `There are currently ${this.props.locationArray.length} events in the neighborhood`
         });
     }
 
@@ -76,7 +78,7 @@ class App extends Component<AppProps, AppState> {
                         this.setState({
                             inputValueX: inputX,
                             inputValueY: inputY,
-                            locationsToShow: getClosestLocations(inputX,inputY,this.props.locationArray),
+                            locationsToShow: getClosestLocations(inputX, inputY, this.props.locationArray),
                             isSearchedResults: true,
                             resultsMessage: `Here are the closest event from (${inputX},${inputY}.`
                         })
@@ -98,7 +100,7 @@ class App extends Component<AppProps, AppState> {
         }
 
         // Update the error message if there is error
-        if(hasError) {
+        if (hasError) {
             this.setState({
                 inputHasError: true,
                 inputErrorMessage: "(Error: Please input the right format of coordinate: x,y , where x and y are integer and both within [-10,10].)",
@@ -146,9 +148,40 @@ class App extends Component<AppProps, AppState> {
             inputErrorMessage,
             resultsMessage
         } = this.state;
+        return (
+            <div className='App'>
+                <div className='SearchInput'>
+                    <form onSubmit={this.handleSearch}>
+                        <label>
+                            <h2>Search for a location</h2>
+                            <p>The location coordinate x,y should be integers and both within [-10,10].</p>
+                            <input type='text' value={inputValue} onChange={this.handleChange} placeholder='e.g 4,2'/>
+                        </label>
+                        <input type='submit' value='Search'/>
+                        {(inputValue.length > 0) ? (
+                            <button onClick={this.handleClearInput}>Clear input</button>
+                        ) : null}
+                    </form>
+                    <p style={{color: 'lightsalmon', visibility: inputHasError ? 'visible' : 'hidden'}}>
+                        {inputErrorMessage}
+                    </p>
+                </div>
 
+                <div className='Results'>
+                    <h4 style={{textAlign: 'center'}}>
+                        {resultsMessage}
+                    </h4>
+                    <GridMap locations={locationsToShow} isSearchedResults={isSearchedResults} inputValueX={inputValueX}
+                             inputValueY={inputValueY}/>
+                    <GridTable locations={locationsToShow} isSearchedResults={isSearchedResults}
+                               inputValueX={inputValueX} inputValueY={inputValueY}/>
+                </div>
+            </div>
+        )
     }
 }
+
+export default App;
 
 /**
  * @desc Get the closest locations which have events to the input coordinates
