@@ -4,7 +4,7 @@ import {NUMBER_OF_CLOSEST_LOCATIONS} from "./constants";
 import {isInteger} from "./utils/is-integer";
 import GridMap from "./components/Grid/GridMap/GridMap";
 import GridTable from "./components/Grid/GridTable/GridTable";
-
+import './App.scss';
 
 interface AppProps {
     locationArray: Array<Location>
